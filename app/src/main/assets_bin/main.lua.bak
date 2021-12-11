@@ -1,0 +1,139 @@
+require "import"
+initApp=true
+import "Jesse205"
+import "agreements"
+import "com.google.android.material.chip.*"
+import "com.google.android.material.chipGroup.*"
+import "com.google.android.material.appbar.CollapsingToolbarLayout"
+import "com.google.android.material.appbar.AppBarLayout"
+import "androidx.appcompat.widget.Toolbar"
+import "android.widget.*"
+import "androidx.appcompat.widget.Toolbar"
+import "androidx.recyclerview.widget.RecyclerView"
+import "androidx.recyclerview.widget.LinearLayoutManager"
+import "androidx.coordinatorlayout.widget.CoordinatorLayout"
+import "com.google.android.material.card.MaterialCardView"
+import "com.google.android.material.appbar.CollapsingToolbarLayout"
+import "com.google.android.material.appbar.AppBarLayout"
+import "com.google.android.material.chip.*"
+import "androidx.core.widget.NestedScrollView"
+import "AppFunctions"
+
+oldTheme=ThemeUtil.getAppTheme()
+oldDarkActionBar=getSharedData("theme_darkactionbar")
+
+lastBackTime=0
+
+function dp2px(n)
+  return n*activity.resources.displayMetrics.scaledDensity+.5
+end
+
+activity.setTitle(R.string.app_name)
+activity.setContentView(loadlayout("layout"))
+
+actionBar=activity.getSupportActionBar()
+
+actionBar.setTitle("塘锦.")
+--actionBar.setDisplayHomeAsUpEnabled(true)
+actionBar.setElevation(0)
+
+
+
+
+--appBar.targetElevation=0--取消AppBarLayout阴影
+
+tab={"刻度尺","画板","水平仪","量角器","翻译","网页获源","短网址生成","简易画板","打字板","LED滚动字幕","时间屏幕","垃圾分类查询","亲戚称呼计算","随机一文","历史上的今天"}
+for k,v in pairs(tab) do
+  a=
+  {
+      Chip;
+      textColor="0xFF000000";
+ 
+      layout_width="wrap";
+      gravity="center";
+      layout_height="wrap";
+      Text=v;
+      onClick=function(p)
+      switch v
+        case "刻度尺"
+         newSubActivity("Ruler")
+         case "画板"
+         newSubActivity("Canvas")
+         end
+        end;
+    };
+ 
+
+
+  f1.addView(loadlayout(a))
+
+end
+
+
+
+
+
+      
+
+
+
+
+
+
+
+function onCreateOptionsMenu(menu)
+  local inflater=activity.getMenuInflater()
+  inflater.inflate(R.menu.menu_main,menu)
+end
+
+function onOptionsItemSelected(item)
+  local id=item.getItemId()
+  local Rid=R.id
+  local aRid=android.R.id
+  if id==aRid.home then
+    activity.finish()
+   elseif id==Rid.menu_more_settings then--设置
+    newSubActivity("Settings")
+   elseif id==Rid.menu_more_about then--关于
+    newSubActivity("About")
+  end
+end
+
+function onResume()
+  if oldTheme~=ThemeUtil.getAppTheme()
+    or oldDarkActionBar~=getSharedData("theme_darkactionbar")
+    then
+    local aRanim=android.R.anim
+    newActivity("main",aRanim.fade_in,aRanim.fade_out)
+    activity.finish()
+    return
+  end
+end
+
+function onKeyDown(KeyCode,event)
+  TouchingKey=true
+end
+
+function onKeyUp(KeyCode,event)
+  if TouchingKey then
+    TouchingKey=false
+    if KeyCode==KeyEvent.KEYCODE_BACK then
+      if (System.currentTimeMillis()-lastBackTime)> 2000 then
+        MyToast(R.string.exit_toast)
+        lastBackTime=System.currentTimeMillis()
+        return true
+      end
+    end
+  end
+end
+
+function onConfigurationChanged(config)
+  screenConfigDecoder:decodeConfiguration(config)
+end
+
+
+screenConfigDecoder=ScreenFixUtil.ScreenConfigDecoder({
+  
+})
+
+onConfigurationChanged(activity.getResources().getConfiguration())

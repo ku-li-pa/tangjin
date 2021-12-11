@@ -1,0 +1,14 @@
+permissionInformation={
+  {
+    icon=R.drawable.ic_file_outline,
+    title="存储";
+    summary="用于调试软件";
+    permissions={"android.permission.WRITE_EXTERNAL_STORAGE","android.permission.READ_EXTERNAL_STORAGE"};
+  },
+  {
+    icon=R.drawable.ic_phone_outline,
+    title="电话";
+    summary="用于统计软件";
+    permissions={"android.permission.READ_PHONE_STATE"};
+  },
+}

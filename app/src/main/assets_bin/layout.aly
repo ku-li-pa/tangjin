@@ -1,0 +1,60 @@
+{
+  CoordinatorLayout;
+  layout_width=-1;
+  layout_height=-1;
+
+{NestedScrollView,
+layout_width=-1;
+
+    layout_height=-1;
+layout_behavior="appbar_scrolling_view_behavior";
+{
+      LinearLayout;
+      orientation="vertical";
+      layout_width="fill";
+      layout_height="fill";
+      {
+        LinearLayout;
+        layout_width="fill";
+        orientation="vertical";
+        
+        layout_height="-2";
+        {
+          LinearLayout;
+          layout_width="fill";
+          gravity="center|left";
+          orientation="horizontal";
+         
+          padding="10dp";
+          {
+            ImageView;
+            src="a.png";
+            --layout_margin="10dp";
+            layout_height="45dp";
+            layout_width="45dp";
+            padding="8dp";
+            ColorFilter=theme.color.colorAccent;
+          };
+          {
+            TextView;
+            Typeface=Typeface.DEFAULT_BOLD;
+            textColor=theme.color.colorAccent;
+            layout_marginLeft="10dp";
+            textSize="15sp";
+            text="日常应用";
+          };
+        };
+{
+    ChipGroup;
+  
+    id="f1";
+    layout_width=-1;
+    layout_height=-1;
+ChipSpacingVertical=dp2px(10),
+ChipSpacingHorizontal=dp2px(10),
+    layout_marginBottom="56dp";
+      };
+ },
+}
+}
+}
